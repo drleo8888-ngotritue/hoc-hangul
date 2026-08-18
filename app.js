@@ -184,6 +184,35 @@ function speak(text) {
   }
 }
 
+// Đọc rời từng âm tiết, có khoảng dừng thật giữa các âm — hiệu quả trên mọi thiết bị
+// vì không phụ thuộc thông số "rate" (nhiều engine Android bỏ qua rate của Web Speech API).
+function speakSlow(text) {
+  if (!speechReady) {
+    showToast('Thiết bị này không hỗ trợ phát âm giọng nói.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const syllables = Array.from(text).filter(ch => ch.trim().length > 0);
+  const voices = window.speechSynthesis.getVoices();
+  const koVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ko'));
+  let i = 0;
+  function speakNext() {
+    if (i >= syllables.length) return;
+    const u = new SpeechSynthesisUtterance(syllables[i]);
+    u.lang = 'ko-KR';
+    u.rate = Math.min(speechRate, 0.8);
+    if (koVoice) u.voice = koVoice;
+    u.onend = () => { i++; setTimeout(speakNext, 420); };
+    u.onerror = () => {
+      i++;
+      if (i === 1) showToast('Không phát được âm — thiết bị có thể chưa cài giọng đọc tiếng Hàn.');
+      setTimeout(speakNext, 150);
+    };
+    window.speechSynthesis.speak(u);
+  }
+  speakNext();
+}
+
 // ============ Navigation ============
 function navigate(view, params = {}) {
   state = { view, params };
@@ -354,6 +383,7 @@ function learnHTML(moduleId, index) {
           ${breakdownHTML(breakdown)}
           <div class="flash-actions">
             <button class="btn btn-primary" id="btn-speak">🔊 Nghe phát âm</button>
+            <button class="btn" id="btn-speak-slow">🐢 Nghe chậm từng âm</button>
             <button class="btn ${isLearned ? '' : 'btn-primary'}" id="btn-toggle-learned">
               ${isLearned ? '✓ Đã học (bấm để bỏ)' : '＋ Đánh dấu đã học'}
             </button>
@@ -388,6 +418,7 @@ function attachLearn(moduleId, index) {
 
   document.getElementById('btn-back-module').addEventListener('click', () => navigate('moduleHome', { moduleId }));
   document.getElementById('btn-speak').addEventListener('click', () => speak(letter.audioText));
+  document.getElementById('btn-speak-slow').addEventListener('click', () => speakSlow(letter.example.word));
   document.getElementById('btn-toggle-learned').addEventListener('click', () => {
     const i = mp.learned.indexOf(index);
     if (i === -1) mp.learned.push(index); else mp.learned.splice(i, 1);
