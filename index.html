@@ -18,6 +18,15 @@
       <div class="header-progress-bar"><div id="header-progress-fill" class="header-progress-fill"></div></div>
       <span id="header-progress-label"></span>
     </div>
+    <button id="btn-settings" class="settings-btn" title="Cài đặt tốc độ đọc">⚙</button>
+  </div>
+  <div id="settings-panel" class="settings-panel" hidden>
+    <h4>🔊 Tốc độ đọc</h4>
+    <div class="settings-row">
+      <input type="range" id="speech-rate-slider" min="0.3" max="1.1" step="0.05">
+      <span id="speech-rate-value"></span>
+    </div>
+    <button class="btn btn-primary btn-block" id="btn-speed-test">Nghe thử: 안녕하세요</button>
   </div>
 </header>
 

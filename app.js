@@ -1,5 +1,8 @@
 // ============ State & persistence ============
 const STORAGE_KEY = 'hangul_app_progress_v1';
+const SPEECH_RATE_KEY = 'hangul_speech_rate_v1';
+let speechRate = parseFloat(localStorage.getItem(SPEECH_RATE_KEY)) || 0.7;
+function saveSpeechRate() { localStorage.setItem(SPEECH_RATE_KEY, String(speechRate)); }
 const MODULE_ICONS = {
   vowels: '아', consonants: '가', syllables: '나', compoundVowels: '애',
   doubleConsonants: '까', batchim: '받',
@@ -168,7 +171,7 @@ function speak(text) {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ko-KR';
-    u.rate = 0.7; // chậm hơn bình thường để nghe rõ từng âm
+    u.rate = speechRate;
     const voices = window.speechSynthesis.getVoices();
     const koVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ko'));
     if (koVoice) u.voice = koVoice;
@@ -734,4 +737,35 @@ function render() {
 
 // ============ INIT ============
 document.getElementById('btn-home').addEventListener('click', () => navigate('home'));
+
+// ---- Settings panel (tốc độ đọc) ----
+const settingsBtn = document.getElementById('btn-settings');
+const settingsPanel = document.getElementById('settings-panel');
+const rateSlider = document.getElementById('speech-rate-slider');
+const rateValueLabel = document.getElementById('speech-rate-value');
+
+function refreshRateLabel(val) { rateValueLabel.textContent = parseFloat(val).toFixed(2) + 'x'; }
+rateSlider.value = speechRate;
+refreshRateLabel(speechRate);
+
+settingsBtn.addEventListener('click', () => {
+  settingsPanel.hidden = !settingsPanel.hidden;
+});
+document.addEventListener('click', (e) => {
+  if (!settingsPanel.hidden && !settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+    settingsPanel.hidden = true;
+  }
+});
+rateSlider.addEventListener('input', () => refreshRateLabel(rateSlider.value));
+rateSlider.addEventListener('change', () => {
+  speechRate = parseFloat(rateSlider.value);
+  saveSpeechRate();
+});
+document.getElementById('btn-speed-test').addEventListener('click', () => {
+  speechRate = parseFloat(rateSlider.value);
+  saveSpeechRate();
+  refreshRateLabel(speechRate);
+  speak('안녕하세요');
+});
+
 render();
