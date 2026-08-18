@@ -132,21 +132,53 @@ function shuffle(arr) {
 function sample(arr, n) { return shuffle(arr).slice(0, n); }
 
 let speechReady = 'speechSynthesis' in window;
-if (speechReady) {
-  window.speechSynthesis.onvoiceschanged = () => {};
+let koVoiceAvailable = null; // null = chưa xác định, true/false = đã kiểm tra xong
+
+function refreshKoVoiceStatus() {
+  if (!speechReady) { koVoiceAvailable = false; return; }
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices || voices.length === 0) return; // danh sách giọng chưa tải xong, thử lại sau
+  koVoiceAvailable = voices.some(v => v.lang && v.lang.toLowerCase().startsWith('ko'));
+  if (state.view === 'home') render();
 }
+if (speechReady) {
+  refreshKoVoiceStatus();
+  window.speechSynthesis.onvoiceschanged = refreshKoVoiceStatus;
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
 function speak(text) {
-  if (!speechReady) return;
+  if (!speechReady) {
+    showToast('Thiết bị này không hỗ trợ phát âm giọng nói.');
+    return;
+  }
   try {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ko-KR';
-    u.rate = 0.85;
+    u.rate = 0.7; // chậm hơn bình thường để nghe rõ từng âm
     const voices = window.speechSynthesis.getVoices();
     const koVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ko'));
     if (koVoice) u.voice = koVoice;
+    u.onerror = () => {
+      showToast('Không phát được âm — thiết bị có thể chưa cài giọng đọc tiếng Hàn. Vào Cài đặt > Trợ năng > Chuyển văn bản thành giọng nói để kiểm tra.');
+    };
     window.speechSynthesis.speak(u);
-  } catch (e) { /* speech not available */ }
+  } catch (e) {
+    showToast('Không phát được âm trên thiết bị này.');
+  }
 }
 
 // ============ Navigation ============
@@ -200,8 +232,12 @@ function homeHTML() {
     `;
   }).join('');
 
-  const speechNote = speechReady ? '' : `
-    <p class="home-note" style="color:var(--amber);">⚠️ Trình duyệt này có thể không hỗ trợ phát âm — hãy thử Chrome/Edge.</p>`;
+  let speechNote = '';
+  if (!speechReady) {
+    speechNote = `<p class="home-note" style="color:var(--amber);">⚠️ Trình duyệt này không hỗ trợ phát âm — hãy thử Chrome/Edge.</p>`;
+  } else if (koVoiceAvailable === false) {
+    speechNote = `<p class="home-note" style="color:var(--amber);">⚠️ Máy chưa có giọng đọc tiếng Hàn. Vào Cài đặt máy > Trợ năng (Accessibility) > Chuyển văn bản thành giọng nói, tải thêm gói giọng Hàn Quốc — hoặc thử mở bằng trình duyệt Chrome.</p>`;
+  }
 
   return `
     <h1 class="home-title">Học bảng chữ cái Hangul</h1>
