@@ -7,6 +7,8 @@ const MODULE_ICONS = {
   vowels: '아', consonants: '가', syllables: '나', compoundVowels: '애',
   doubleConsonants: '까', batchim: '받', soundChanges: '연',
 };
+const HANGUL_VIEWS = new Set(['home', 'moduleHome', 'learn', 'practice', 'result', 'builder']);
+const VOCAB_VIEWS = new Set(['vocabHome', 'vocabTopic']);
 
 // ============ Hangul syllable composition (Unicode formula) ============
 const INITIAL_LIST = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
@@ -233,7 +235,7 @@ function updateHeaderProgress() {
   const pct = total ? Math.round((learned / total) * 100) : 0;
   fill.style.width = pct + '%';
   label.textContent = `${learned}/${total} chữ`;
-  wrap.hidden = false;
+  wrap.hidden = VOCAB_VIEWS.has(state.view);
 }
 
 // ============ HOME ============
@@ -783,6 +785,61 @@ function attachBuilder(moduleId) {
   speak(composed);
 }
 
+// ============ VOCAB (Từ vựng đời sống) ============
+function vocabHomeHTML() {
+  const cards = VOCAB_TOPICS.map(t => `
+    <button class="module-card" data-topic="${t.id}">
+      <div class="module-glyph">${t.icon}</div>
+      <div class="module-body">
+        <h3>${t.title}</h3>
+        <p>${t.words.length} từ / cụm từ</p>
+      </div>
+    </button>
+  `).join('');
+
+  return `
+    <h1 class="home-title">Từ vựng đời sống</h1>
+    <p class="home-sub">10 chủ điểm tiếng Hàn dùng trong sinh hoạt hằng ngày, kèm cách sử dụng thực tế.</p>
+    <div class="module-grid">${cards}</div>
+  `;
+}
+function attachVocabHome() {
+  document.querySelectorAll('#app .module-card').forEach(btn => {
+    btn.addEventListener('click', () => navigate('vocabTopic', { topicId: btn.dataset.topic }));
+  });
+}
+
+function vocabTopicHTML(topicId) {
+  const topic = VOCAB_TOPICS.find(t => t.id === topicId);
+  const wordsHTML = topic.words.map((w, i) => `
+    <div class="vocab-card">
+      <div class="vocab-card-head">
+        <div>
+          <div class="vocab-word">${w.korean}</div>
+          <div class="vocab-roman">${w.romanization}</div>
+        </div>
+        <button class="vocab-audio-btn" data-index="${i}" title="Nghe phát âm">🔊</button>
+      </div>
+      <p class="vocab-meaning">${w.meaning}</p>
+      <p class="vocab-usage">💡 ${w.usage}</p>
+    </div>
+  `).join('');
+
+  return `
+    <div class="back-row"><button class="btn btn-ghost" id="btn-back-vocab">← Từ vựng đời sống</button></div>
+    <h2 class="view-title">${topic.icon} ${topic.title}</h2>
+    <p class="view-sub">${topic.words.length} từ / cụm từ</p>
+    <div class="vocab-list">${wordsHTML}</div>
+  `;
+}
+function attachVocabTopic(topicId) {
+  const topic = VOCAB_TOPICS.find(t => t.id === topicId);
+  document.getElementById('btn-back-vocab').addEventListener('click', () => navigate('vocabHome'));
+  document.querySelectorAll('.vocab-audio-btn').forEach(btn => {
+    btn.addEventListener('click', () => speak(topic.words[Number(btn.dataset.index)].korean));
+  });
+}
+
 // ============ RENDER DISPATCH ============
 function render() {
   const app = document.getElementById('app');
@@ -799,13 +856,24 @@ function render() {
       app.innerHTML = resultHTML(); attachResult(); break;
     case 'builder':
       app.innerHTML = builderHTML(state.params.moduleId); attachBuilder(state.params.moduleId); break;
+    case 'vocabHome':
+      app.innerHTML = vocabHomeHTML(); attachVocabHome(); break;
+    case 'vocabTopic':
+      app.innerHTML = vocabTopicHTML(state.params.topicId); attachVocabTopic(state.params.topicId); break;
   }
   updateHeaderProgress();
+  updateTabBar();
   window.scrollTo(0, 0);
+}
+function updateTabBar() {
+  document.getElementById('tab-hangul').classList.toggle('active', HANGUL_VIEWS.has(state.view));
+  document.getElementById('tab-vocab').classList.toggle('active', VOCAB_VIEWS.has(state.view));
 }
 
 // ============ INIT ============
 document.getElementById('btn-home').addEventListener('click', () => navigate('home'));
+document.getElementById('tab-hangul').addEventListener('click', () => navigate('home'));
+document.getElementById('tab-vocab').addEventListener('click', () => navigate('vocabHome'));
 
 // ---- Settings panel (tốc độ đọc) ----
 const settingsBtn = document.getElementById('btn-settings');
