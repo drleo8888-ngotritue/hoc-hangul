@@ -825,11 +825,30 @@ function vocabTopicHTML(topicId) {
     </div>
   `).join('');
 
+  const sentencesHTML = topic.sentences.map((s, i) => `
+    <div class="vocab-card">
+      <div class="vocab-card-head">
+        <div>
+          <div class="vocab-word">${s.korean}</div>
+          <div class="vocab-roman">${s.romanization}</div>
+        </div>
+        <button class="sentence-audio-btn" data-index="${i}" title="Nghe phát âm">🔊</button>
+      </div>
+      <p class="vocab-meaning">${s.meaning}</p>
+      <p class="grammar-note">📐 ${s.grammar}</p>
+    </div>
+  `).join('');
+
   return `
     <div class="back-row"><button class="btn btn-ghost" id="btn-back-vocab">← Từ vựng đời sống</button></div>
     <h2 class="view-title">${topic.icon} ${topic.title}</h2>
-    <p class="view-sub">${topic.words.length} từ / cụm từ</p>
+    <p class="view-sub">${topic.words.length} từ / cụm từ · ${topic.sentences.length} câu thường dùng</p>
+
+    <h3 class="section-subtitle">📖 Từ vựng</h3>
     <div class="vocab-list">${wordsHTML}</div>
+
+    <h3 class="section-subtitle">🗣️ Câu thường dùng</h3>
+    <div class="vocab-list">${sentencesHTML}</div>
   `;
 }
 function attachVocabTopic(topicId) {
@@ -837,6 +856,9 @@ function attachVocabTopic(topicId) {
   document.getElementById('btn-back-vocab').addEventListener('click', () => navigate('vocabHome'));
   document.querySelectorAll('.vocab-audio-btn').forEach(btn => {
     btn.addEventListener('click', () => speak(topic.words[Number(btn.dataset.index)].korean));
+  });
+  document.querySelectorAll('.sentence-audio-btn').forEach(btn => {
+    btn.addEventListener('click', () => speak(topic.sentences[Number(btn.dataset.index)].korean));
   });
 }
 
