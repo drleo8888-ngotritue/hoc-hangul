@@ -5,7 +5,7 @@ let speechRate = parseFloat(localStorage.getItem(SPEECH_RATE_KEY)) || 0.7;
 function saveSpeechRate() { localStorage.setItem(SPEECH_RATE_KEY, String(speechRate)); }
 const MODULE_ICONS = {
   vowels: '아', consonants: '가', syllables: '나', compoundVowels: '애',
-  doubleConsonants: '까', batchim: '받',
+  doubleConsonants: '까', batchim: '받', soundChanges: '연',
 };
 
 // ============ Hangul syllable composition (Unicode formula) ============

@@ -134,4 +134,35 @@ const MODULES = [
       { char: '곧', romanization: 'got', hint: 'Có batchim: ㄱ+ㅗ ở trên, ㄷ (batchim) ở dưới cùng', audioText: '곧', example: { word: '곧', romanization: 'got', meaning: 'ngay lập tức' } },
     ],
   },
+  {
+    id: 'soundChanges',
+    title: 'Quy tắc biến âm',
+    subtitle: '음운 변화 — cách đọc khác cách viết',
+    note: 'Khi các âm tiết đứng cạnh nhau, cách ĐỌC thực tế thường khác cách VIẾT — đây là phần khiến người học dễ đọc sai nhất. 6 quy tắc phổ biến: (1) Nối âm (연음) — batchim nhảy sang làm phụ âm đầu âm tiết sau nếu âm tiết đó bắt đầu bằng ㅇ câm. (2) Đội âm (경음화) — batchim ㄱㄷㅂ khiến phụ âm sau bị đọc căng. (3) Mũi hóa (비음화) — batchim ㄱㄷㅂ biến thành âm mũi khi đứng trước ㄴ/ㅁ. (4) Bật hơi hóa (격음화) — ㅎ gặp ㄱㄷㅂㅈ tạo thành âm bật hơi. (5) Cứng hóa vòm miệng (구개음화) — batchim ㄷ,ㅌ + 이 biến thành ㅈ,ㅊ. (6) Lỏng hóa (유음화) — ㄴ và ㄹ đứng cạnh nhau đều đọc thành ㄹㄹ. Mỗi thẻ dưới đây: chữ lớn là cách VIẾT, phiên âm là cách ĐỌC thật.',
+    letters: [
+      // --- 1. Nối âm (연음법칙) ---
+      { char: '옷이', romanization: 'osi', hint: 'Nối âm (연음): batchim ㅅ của "옷" nhảy sang làm phụ âm đầu của "이" (vì "이" bắt đầu bằng ㅇ câm) → đọc liền thành "오시", không đọc rời "옷" + "i".', audioText: '옷이', example: { word: '오시', romanization: 'osi', meaning: 'quần áo (dạng chủ ngữ: 옷 + trợ từ 이)' } },
+      { char: '밥을', romanization: 'babeul', hint: 'Nối âm (연음): batchim ㅂ của "밥" nhảy sang làm phụ âm đầu của "을" → đọc liền thành "바블".', audioText: '밥을', example: { word: '바블', romanization: 'babeul', meaning: 'cơm (dạng tân ngữ: 밥 + trợ từ 을)' } },
+      { char: '꽃이', romanization: 'kkochi', hint: 'Nối âm (연음): batchim ㅊ của "꽃" nhảy sang làm phụ âm đầu của "이" → đọc liền thành "꼬치".', audioText: '꽃이', example: { word: '꼬치', romanization: 'kkochi', meaning: 'hoa (dạng chủ ngữ: 꽃 + trợ từ 이)' } },
+      { char: '산이', romanization: 'sani', hint: 'Nối âm (연음): batchim ㄴ của "산" nhảy sang làm phụ âm đầu của "이" → đọc liền thành "사니".', audioText: '산이', example: { word: '사니', romanization: 'sani', meaning: 'núi (dạng chủ ngữ: 산 + trợ từ 이)' } },
+      // --- 2. Đội âm (경음화) ---
+      { char: '학교', romanization: 'hakkyo', hint: 'Đội âm (경음화): batchim ㄱ của "학" khiến ㄱ của "교" bị đọc căng thành ㄲ → đọc thành "학꾜".', audioText: '학교', example: { word: '학꾜', romanization: 'hakkyo', meaning: 'trường học' } },
+      { char: '국밥', romanization: 'gukppap', hint: 'Đội âm (경음화): batchim ㄱ của "국" khiến ㅂ của "밥" bị đọc căng thành ㅃ → đọc thành "국빱".', audioText: '국밥', example: { word: '국빱', romanization: 'gukppap', meaning: 'cơm chan canh' } },
+      { char: '잡지', romanization: 'japjji', hint: 'Đội âm (경음화): batchim ㅂ của "잡" khiến ㅈ của "지" bị đọc căng thành ㅉ → đọc thành "잡찌".', audioText: '잡지', example: { word: '잡찌', romanization: 'japjji', meaning: 'tạp chí' } },
+      // --- 3. Mũi hóa (비음화) ---
+      { char: '국물', romanization: 'gungmul', hint: 'Mũi hóa (비음화): batchim ㄱ của "국" đứng trước ㅁ nên biến thành âm mũi ㅇ → đọc thành "궁물".', audioText: '국물', example: { word: '궁물', romanization: 'gungmul', meaning: 'nước dùng / nước canh' } },
+      { char: '학년', romanization: 'hangnyeon', hint: 'Mũi hóa (비음화): batchim ㄱ của "학" đứng trước ㄴ nên biến thành âm mũi ㅇ → đọc thành "항년".', audioText: '학년', example: { word: '항년', romanization: 'hangnyeon', meaning: 'năm học / khối lớp' } },
+      { char: '앞문', romanization: 'ammun', hint: 'Mũi hóa (비음화): batchim ㅍ của "앞" (rút gọn về ㅂ) đứng trước ㅁ nên biến thành âm mũi ㅁ → đọc thành "암문".', audioText: '앞문', example: { word: '암문', romanization: 'ammun', meaning: 'cửa trước' } },
+      // --- 4. Bật hơi hóa (격음화) ---
+      { char: '좋다', romanization: 'jota', hint: 'Bật hơi hóa (격음화): batchim ㅎ của "좋" gặp ㄷ của "다" hợp lại thành âm bật hơi ㅌ → đọc thành "조타".', audioText: '좋다', example: { word: '조타', romanization: 'jota', meaning: 'tốt / thích (nguyên mẫu)' } },
+      { char: '축하', romanization: 'chuka', hint: 'Bật hơi hóa (격음화): batchim ㄱ của "축" gặp ㅎ của "하" hợp lại thành âm bật hơi ㅋ → đọc thành "추카".', audioText: '축하', example: { word: '추카', romanization: 'chuka', meaning: 'chúc mừng' } },
+      { char: '입학', romanization: 'ipak', hint: 'Bật hơi hóa (격음화): batchim ㅂ của "입" gặp ㅎ của "학" hợp lại thành âm bật hơi ㅍ → đọc thành "이팍".', audioText: '입학', example: { word: '이팍', romanization: 'ipak', meaning: 'nhập học' } },
+      // --- 5. Cứng hóa vòm miệng (구개음화) ---
+      { char: '같이', romanization: 'gachi', hint: 'Cứng hóa vòm miệng (구개음화): batchim ㅌ của "같" đứng trước "이" nên biến thành ㅊ → đọc thành "가치" (rất phổ biến trong giao tiếp).', audioText: '같이', example: { word: '가치', romanization: 'gachi', meaning: 'cùng nhau' } },
+      { char: '굳이', romanization: 'guji', hint: 'Cứng hóa vòm miệng (구개음화): batchim ㄷ của "굳" đứng trước "이" nên biến thành ㅈ → đọc thành "구지".', audioText: '굳이', example: { word: '구지', romanization: 'guji', meaning: 'cố ý, nhất quyết' } },
+      // --- 6. Lỏng hóa (유음화) ---
+      { char: '설날', romanization: 'seollal', hint: 'Lỏng hóa (유음화): ㄹ của "설" và ㄴ của "날" đứng cạnh nhau nên cả hai đều đọc thành ㄹㄹ → đọc thành "설랄".', audioText: '설날', example: { word: '설랄', romanization: 'seollal', meaning: 'Tết âm lịch' } },
+      { char: '신라', romanization: 'silla', hint: 'Lỏng hóa (유음화): ㄴ của "신" và ㄹ của "라" đứng cạnh nhau nên cả hai đều đọc thành ㄹㄹ → đọc thành "실라".', audioText: '신라', example: { word: '실라', romanization: 'silla', meaning: 'Silla (tên vương triều cổ Hàn Quốc)' } },
+    ],
+  },
 ];
