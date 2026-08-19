@@ -826,7 +826,7 @@ function vocabTopicHTML(topicId) {
   `).join('');
 
   const sentencesHTML = topic.sentences.map((s, i) => `
-    <div class="vocab-card">
+    <div class="vocab-card sentence-card-clickable" data-sentence-index="${i}">
       <div class="vocab-card-head">
         <div>
           <div class="vocab-word">${s.korean}</div>
@@ -836,6 +836,7 @@ function vocabTopicHTML(topicId) {
       </div>
       <p class="vocab-meaning">${s.meaning}</p>
       <p class="grammar-note">📐 ${s.grammar}</p>
+      <p class="tap-more-hint">👆 Bấm để xem thêm ví dụ</p>
     </div>
   `).join('');
 
@@ -858,8 +859,49 @@ function attachVocabTopic(topicId) {
     btn.addEventListener('click', () => speak(topic.words[Number(btn.dataset.index)].korean));
   });
   document.querySelectorAll('.sentence-audio-btn').forEach(btn => {
-    btn.addEventListener('click', () => speak(topic.sentences[Number(btn.dataset.index)].korean));
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      speak(topic.sentences[Number(btn.dataset.index)].korean);
+    });
   });
+  document.querySelectorAll('.sentence-card-clickable').forEach(card => {
+    card.addEventListener('click', () => openSentenceModal(topic, Number(card.dataset.sentenceIndex)));
+  });
+}
+
+// ---- Modal popup (chi tiết câu + ví dụ thêm) ----
+function openModal(html) {
+  document.getElementById('modal-box').innerHTML = html;
+  document.getElementById('modal-overlay').hidden = false;
+}
+function closeModal() {
+  document.getElementById('modal-overlay').hidden = true;
+}
+function openSentenceModal(topic, index) {
+  const s = topic.sentences[index];
+  const examplesHTML = (s.examples || []).map(ex => `
+    <div class="modal-example-item">
+      <div class="modal-example-text">
+        <div class="modal-example-korean">${ex.korean}</div>
+        <div class="modal-example-roman">${ex.romanization}</div>
+        <div class="modal-example-meaning">${ex.meaning}</div>
+      </div>
+      <button class="vocab-audio-btn modal-example-audio" data-speak="${ex.korean}" title="Nghe">🔊</button>
+    </div>
+  `).join('');
+
+  openModal(`
+    <button class="modal-close" data-close>✕</button>
+    <div class="modal-sentence-word">${s.korean}</div>
+    <div class="modal-sentence-roman">${s.romanization}</div>
+    <div class="modal-sentence-meaning">${s.meaning}</div>
+    <div class="modal-grammar">📐 ${s.grammar}</div>
+    ${examplesHTML ? `
+      <div class="modal-examples-title">Thêm ví dụ cùng cấu trúc</div>
+      ${examplesHTML}
+    ` : ''}
+    <button class="btn btn-primary btn-block modal-listen-main" data-speak="${s.korean}">🔊 Nghe câu chính</button>
+  `);
 }
 
 // ============ RENDER DISPATCH ============
@@ -896,6 +938,19 @@ function updateTabBar() {
 document.getElementById('btn-home').addEventListener('click', () => navigate('home'));
 document.getElementById('tab-hangul').addEventListener('click', () => navigate('home'));
 document.getElementById('tab-vocab').addEventListener('click', () => navigate('vocabHome'));
+
+// ---- Modal popup ----
+document.getElementById('modal-box').addEventListener('click', (e) => {
+  if (e.target.closest('[data-close]')) { closeModal(); return; }
+  const speakEl = e.target.closest('[data-speak]');
+  if (speakEl) speak(speakEl.dataset.speak);
+});
+document.getElementById('modal-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'modal-overlay') closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !document.getElementById('modal-overlay').hidden) closeModal();
+});
 
 // ---- Settings panel (tốc độ đọc) ----
 const settingsBtn = document.getElementById('btn-settings');

@@ -544,6 +544,81 @@ canvas#trace-canvas {
 }
 .section-subtitle:first-of-type { margin-top: 4px; }
 
+/* ---------- Sentence detail modal ---------- */
+.sentence-card-clickable { cursor: pointer; }
+.sentence-card-clickable:hover { border-color: var(--accent); }
+.tap-more-hint { font-size: 11px; color: var(--accent); margin: 8px 0 0; text-align: right; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--surface);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 26px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 15px;
+  cursor: pointer;
+}
+.modal-close:hover { background: var(--border); }
+.modal-sentence-word { font-size: 26px; font-weight: 700; line-height: 1.3; margin: 4px 28px 4px 0; }
+.modal-sentence-roman { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+.modal-sentence-meaning { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+.modal-grammar {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: #eef7ee;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 22px;
+}
+.modal-examples-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.modal-example-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.modal-example-item:first-of-type { border-top: none; }
+.modal-example-text { flex: 1; min-width: 0; }
+.modal-example-korean { font-size: 15px; font-weight: 600; }
+.modal-example-roman { font-size: 12px; color: var(--accent); }
+.modal-example-meaning { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+.modal-example-audio { flex-shrink: 0; }
+.modal-listen-main { margin-top: 20px; }
+
 /* ---------- Toast ---------- */
 #app-toast {
   position: fixed;

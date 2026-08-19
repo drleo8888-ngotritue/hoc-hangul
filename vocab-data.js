@@ -1,6 +1,6 @@
 // Dữ liệu từ vựng tiếng Hàn theo chủ điểm sinh hoạt đời thường
 // usage: ghi chú cách dùng thực tế (khi nào dùng, với ai, ví dụ câu)
-// sentences: câu thường dùng của chủ điểm, kèm giải thích ngữ pháp
+// sentences: câu thường dùng của chủ điểm, kèm giải thích ngữ pháp và các ví dụ khác cùng cấu trúc (examples)
 
 const VOCAB_TOPICS = [
   {
@@ -27,11 +27,36 @@ const VOCAB_TOPICS = [
       { korean: '수고하세요', romanization: 'sugohaseyo', meaning: 'Chúc làm việc vui vẻ / Vất vả rồi', usage: 'Nói khi chia tay đồng nghiệp lúc tan làm, hoặc với người đang làm việc (nhân viên phục vụ, bảo vệ...).' },
     ],
     sentences: [
-      { korean: '저는 학생이에요.', romanization: 'jeoneun haksaengieyo.', meaning: 'Tôi là học sinh/sinh viên.', grammar: '저는 (tôi + trợ từ chủ đề "는") + 학생 (danh từ) + 이에요 (đuôi "là..." lịch sự — danh từ có batchim dùng 이에요, không có batchim dùng 예요; 학생 có batchim ㅇ nên dùng 이에요).' },
-      { korean: '이것은 무엇이에요?', romanization: 'igeoseun mueosieyo?', meaning: 'Cái này là gì?', grammar: '이것은 (cái này + trợ từ chủ đề 은) + 무엇 (cái gì) + 이에요 → mẫu câu hỏi "A là gì?" cơ bản nhất.' },
-      { korean: '한국어를 배우고 있어요.', romanization: 'hangugeoreul baeugo isseoyo.', meaning: 'Tôi đang học tiếng Hàn.', grammar: 'danh từ + 를/을 (trợ từ tân ngữ) + động từ + 고 있어요 (thì tiếp diễn, diễn tả hành động đang xảy ra).' },
-      { korean: '이름이 뭐예요?', romanization: 'ireumi mwoyeyo?', meaning: 'Tên bạn là gì?', grammar: '이름이 (tên + trợ từ chủ ngữ 이, vì 이름 kết thúc bằng phụ âm ㅁ) + 뭐예요 (dạng nói thân mật/rút gọn của 무엇이에요).' },
-      { korean: '다시 만나서 반가워요.', romanization: 'dasi mannaseo bangawoyo.', meaning: 'Rất vui được gặp lại.', grammar: '다시 (lại, lần nữa) + 만나서 (동사 "만나다" + đuôi 아서/어서 diễn tả trình tự "làm A rồi B") + 반가워요.' },
+      { korean: '저는 학생이에요.', romanization: 'jeoneun haksaengieyo.', meaning: 'Tôi là học sinh/sinh viên.', grammar: '저는 (tôi + trợ từ chủ đề "는") + 학생 (danh từ) + 이에요 (đuôi "là..." lịch sự — danh từ có batchim dùng 이에요, không có batchim dùng 예요; 학생 có batchim ㅇ nên dùng 이에요).',
+        examples: [
+          { korean: '이거는 책이에요.', romanization: 'igeoneun chaegieyo.', meaning: 'Cái này là quyển sách.' },
+          { korean: '저는 선생님이에요.', romanization: 'jeoneun seonsaengnimieyo.', meaning: 'Tôi là giáo viên.' },
+          { korean: '여기는 학교예요.', romanization: 'yeogineun hakgyoyeyo.', meaning: 'Đây là trường học (예요 vì "학교" không có batchim).' },
+        ] },
+      { korean: '이것은 무엇이에요?', romanization: 'igeoseun mueosieyo?', meaning: 'Cái này là gì?', grammar: '이것은 (cái này + trợ từ chủ đề 은) + 무엇 (cái gì) + 이에요 → mẫu câu hỏi "A là gì?" cơ bản nhất.',
+        examples: [
+          { korean: '저것은 무엇이에요?', romanization: 'jeogeoseun mueosieyo?', meaning: 'Cái kia là gì?' },
+          { korean: '이름이 무엇이에요?', romanization: 'ireumi mueosieyo?', meaning: 'Tên là gì?' },
+          { korean: '취미가 무엇이에요?', romanization: 'chwimiga mueosieyo?', meaning: 'Sở thích là gì?' },
+        ] },
+      { korean: '한국어를 배우고 있어요.', romanization: 'hangugeoreul baeugo isseoyo.', meaning: 'Tôi đang học tiếng Hàn.', grammar: 'danh từ + 를/을 (trợ từ tân ngữ) + động từ + 고 있어요 (thì tiếp diễn, diễn tả hành động đang xảy ra).',
+        examples: [
+          { korean: '밥을 먹고 있어요.', romanization: 'babeul meokgo isseoyo.', meaning: 'Tôi đang ăn cơm.' },
+          { korean: '텔레비전을 보고 있어요.', romanization: 'tellebijeoneul bogo isseoyo.', meaning: 'Tôi đang xem TV.' },
+          { korean: '친구를 기다리고 있어요.', romanization: 'chinguleul gidarigo isseoyo.', meaning: 'Tôi đang đợi bạn.' },
+        ] },
+      { korean: '이름이 뭐예요?', romanization: 'ireumi mwoyeyo?', meaning: 'Tên bạn là gì?', grammar: '이름이 (tên + trợ từ chủ ngữ 이, vì 이름 kết thúc bằng phụ âm ㅁ) + 뭐예요 (dạng nói thân mật/rút gọn của 무엇이에요).',
+        examples: [
+          { korean: '이게 뭐예요?', romanization: 'ige mwoyeyo?', meaning: 'Cái này là gì? (thân mật hơn 이것이 뭐예요)' },
+          { korean: '취미가 뭐예요?', romanization: 'chwimiga mwoyeyo?', meaning: 'Sở thích là gì?' },
+          { korean: '직업이 뭐예요?', romanization: 'jigeobi mwoyeyo?', meaning: 'Nghề nghiệp là gì?' },
+        ] },
+      { korean: '다시 만나서 반가워요.', romanization: 'dasi mannaseo bangawoyo.', meaning: 'Rất vui được gặp lại.', grammar: '다시 (lại, lần nữa) + 만나서 (동사 "만나다" + đuôi 아서/어서 diễn tả trình tự "làm A rồi B") + 반가워요.',
+        examples: [
+          { korean: '늦어서 죄송해요.', romanization: 'neujeoseo joesonghaeyo.', meaning: 'Xin lỗi vì đến muộn.' },
+          { korean: '배고파서 밥을 먹어요.', romanization: 'baegopaseo babeul meogeoyo.', meaning: 'Vì đói nên tôi ăn cơm.' },
+          { korean: '피곤해서 쉬어요.', romanization: 'pigonhaeseo swieoyo.', meaning: 'Vì mệt nên tôi nghỉ ngơi.' },
+        ] },
     ],
   },
   {
@@ -58,11 +83,36 @@ const VOCAB_TOPICS = [
       { korean: '고모', romanization: 'gomo', meaning: 'Cô', usage: 'Em/chị gái của bố — phân biệt với 이모 (phía mẹ) và 삼촌 (phía chú/cậu).' },
     ],
     sentences: [
-      { korean: '저는 가족이 네 명이에요.', romanization: 'jeoneun gajogi ne myeongieyo.', meaning: 'Gia đình tôi có 4 người.', grammar: '가족이 (gia đình + trợ từ chủ ngữ 이) + 네 명 (4 người: 넷→네 khi đứng trước lượng từ + 명 lượng từ đếm người) + 이에요.' },
-      { korean: '오빠가 있어요.', romanization: 'oppaga isseoyo.', meaning: 'Tôi có anh trai (người nói là nữ).', grammar: 'danh từ + 가/이 (trợ từ chủ ngữ) + 있어요 (có, tồn tại) — cấu trúc "có ai/cái gì" cơ bản nhất.' },
-      { korean: '형제가 몇 명이에요?', romanization: 'hyeongjega myeot myeongieyo?', meaning: 'Bạn có mấy anh chị em?', grammar: '형제 (anh chị em nói chung) + 가 + 몇 명 ("몇" = mấy/bao nhiêu, luôn đi kèm lượng từ) + 이에요.' },
-      { korean: '저는 막내예요.', romanization: 'jeoneun magnaeyeyo.', meaning: 'Tôi là con út.', grammar: '막내 (con út, kết thúc bằng nguyên âm ㅐ, không có batchim) + 예요 (dùng 예요 thay vì 이에요 vì danh từ không có batchim).' },
-      { korean: '아버지는 회사원이에요.', romanization: 'abeojineun hoesawonieyo.', meaning: 'Bố tôi là nhân viên công ty.', grammar: '아버지는 (bố + trợ từ chủ đề 는, vì kết thúc nguyên âm) + 회사원 (nhân viên công ty) + 이에요.' },
+      { korean: '저는 가족이 네 명이에요.', romanization: 'jeoneun gajogi ne myeongieyo.', meaning: 'Gia đình tôi có 4 người.', grammar: '가족이 (gia đình + trợ từ chủ ngữ 이) + 네 명 (4 người: 넷→네 khi đứng trước lượng từ + 명 lượng từ đếm người) + 이에요.',
+        examples: [
+          { korean: '학생이 열 명 있어요.', romanization: 'haksaengi yeol myeong isseoyo.', meaning: 'Có 10 học sinh.' },
+          { korean: '친구가 세 명 왔어요.', romanization: 'chinguga se myeong wasseoyo.', meaning: '3 người bạn đã đến.' },
+          { korean: '가족이 다섯 명이에요.', romanization: 'gajogi daseot myeongieyo.', meaning: 'Gia đình có 5 người.' },
+        ] },
+      { korean: '오빠가 있어요.', romanization: 'oppaga isseoyo.', meaning: 'Tôi có anh trai (người nói là nữ).', grammar: 'danh từ + 가/이 (trợ từ chủ ngữ) + 있어요 (có, tồn tại) — cấu trúc "có ai/cái gì" cơ bản nhất.',
+        examples: [
+          { korean: '여동생이 있어요.', romanization: 'yeodongsaengi isseoyo.', meaning: 'Tôi có em gái.' },
+          { korean: '개가 있어요.', romanization: 'gaega isseoyo.', meaning: 'Tôi có con chó.' },
+          { korean: '시간이 있어요?', romanization: 'sigani isseoyo?', meaning: 'Bạn có thời gian không?' },
+        ] },
+      { korean: '형제가 몇 명이에요?', romanization: 'hyeongjega myeot myeongieyo?', meaning: 'Bạn có mấy anh chị em?', grammar: '형제 (anh chị em nói chung) + 가 + 몇 명 ("몇" = mấy/bao nhiêu, luôn đi kèm lượng từ) + 이에요.',
+        examples: [
+          { korean: '친구가 몇 명이에요?', romanization: 'chinguga myeot myeongieyo?', meaning: 'Bạn có mấy người bạn?' },
+          { korean: '자녀가 몇 명이에요?', romanization: 'janyeoga myeot myeongieyo?', meaning: 'Bạn có mấy người con?' },
+          { korean: '나이가 몇 살이에요?', romanization: 'naiga myeot sarieyo?', meaning: 'Bạn bao nhiêu tuổi? (cùng mẫu 몇 + lượng từ)' },
+        ] },
+      { korean: '저는 막내예요.', romanization: 'jeoneun magnaeyeyo.', meaning: 'Tôi là con út.', grammar: '막내 (con út, kết thúc bằng nguyên âm ㅐ, không có batchim) + 예요 (dùng 예요 thay vì 이에요 vì danh từ không có batchim).',
+        examples: [
+          { korean: '저는 의사예요.', romanization: 'jeoneun uisayeyo.', meaning: 'Tôi là bác sĩ.' },
+          { korean: '여기는 카페예요.', romanization: 'yeogineun kapeyeyo.', meaning: 'Đây là quán cà phê.' },
+          { korean: '그는 배우예요.', romanization: 'geuneun baeuyeyo.', meaning: 'Anh ấy là diễn viên.' },
+        ] },
+      { korean: '아버지는 회사원이에요.', romanization: 'abeojineun hoesawonieyo.', meaning: 'Bố tôi là nhân viên công ty.', grammar: '아버지는 (bố + trợ từ chủ đề 는, vì kết thúc nguyên âm) + 회사원 (nhân viên công ty) + 이에요.',
+        examples: [
+          { korean: '어머니는 주부예요.', romanization: 'eomeonineun jubuyeyo.', meaning: 'Mẹ tôi là nội trợ.' },
+          { korean: '형은 대학생이에요.', romanization: 'hyeongeun daehaksaengieyo.', meaning: 'Anh tôi là sinh viên đại học.' },
+          { korean: '저는 회사원이에요.', romanization: 'jeoneun hoesawonieyo.', meaning: 'Tôi là nhân viên công ty.' },
+        ] },
     ],
   },
   {
@@ -89,11 +139,36 @@ const VOCAB_TOPICS = [
       { korean: '반', romanization: 'ban', meaning: 'Một nửa / rưỡi', usage: 'Dùng sau giờ để chỉ "rưỡi", ví dụ 한 시 반 (1 giờ rưỡi = 1:30).' },
     ],
     sentences: [
-      { korean: '이거 얼마예요? 오천 원이에요.', romanization: 'igeo eolmayeyo? ocheon wonieyo.', meaning: 'Cái này bao nhiêu tiền? — 5.000 won.', grammar: '오천 (5.000, số Hán-Hàn: 오 + 천) + 원 (đơn vị tiền) + 이에요 — luôn dùng số Hán-Hàn khi nói tiền.' },
-      { korean: '저는 스물다섯 살이에요.', romanization: 'jeoneun seumuldaseot sarieyo.', meaning: 'Tôi 25 tuổi.', grammar: '스물다섯 (25, số thuần Hàn: 스물 + 다섯) + 살 (tuổi) — lưu ý KHÔNG đổi thành 스무 vì 스무 chỉ dùng khi đúng số 20 tròn đứng ngay trước lượng từ.' },
-      { korean: '전화번호가 몇 번이에요?', romanization: 'jeonhwabeonhoga myeot beonieyo?', meaning: 'Số điện thoại của bạn là số mấy?', grammar: '전화번호 (số điện thoại) + 가 (trợ từ chủ ngữ) + 몇 번 (số mấy, dùng số Hán-Hàn) + 이에요.' },
-      { korean: '두 개 주세요.', romanization: 'du gae juseyo.', meaning: 'Cho tôi 2 cái.', grammar: '두 (hai, dạng đặc biệt của "둘" khi đứng trước lượng từ) + 개 (lượng từ đồ vật) + 주세요 (xin cho tôi — đuôi mệnh lệnh lịch sự).' },
-      { korean: '지금 한 시 반이에요.', romanization: 'jigeum han si banieyo.', meaning: 'Bây giờ là 1 giờ rưỡi.', grammar: '한 시 (1 giờ: "하나"→"한" khi đứng trước lượng từ 시) + 반 (rưỡi) + 이에요.' },
+      { korean: '이거 얼마예요? 오천 원이에요.', romanization: 'igeo eolmayeyo? ocheon wonieyo.', meaning: 'Cái này bao nhiêu tiền? — 5.000 won.', grammar: '오천 (5.000, số Hán-Hàn: 오 + 천) + 원 (đơn vị tiền) + 이에요 — luôn dùng số Hán-Hàn khi nói tiền.',
+        examples: [
+          { korean: '만 원이에요.', romanization: 'man wonieyo.', meaning: '10.000 won.' },
+          { korean: '이만 오천 원이에요.', romanization: 'imanocheon wonieyo.', meaning: '25.000 won.' },
+          { korean: '천오백 원이에요.', romanization: 'cheonobaek wonieyo.', meaning: '1.500 won.' },
+        ] },
+      { korean: '저는 스물다섯 살이에요.', romanization: 'jeoneun seumuldaseot sarieyo.', meaning: 'Tôi 25 tuổi.', grammar: '스물다섯 (25, số thuần Hàn: 스물 + 다섯) + 살 (tuổi) — lưu ý KHÔNG đổi thành 스무 vì 스무 chỉ dùng khi đúng số 20 tròn đứng ngay trước lượng từ.',
+        examples: [
+          { korean: '저는 서른 살이에요.', romanization: 'jeoneun seoreun sarieyo.', meaning: 'Tôi 30 tuổi.' },
+          { korean: '동생은 열여덟 살이에요.', romanization: 'dongsaengeun yeollyeodeol sarieyo.', meaning: 'Em tôi 18 tuổi.' },
+          { korean: '아이가 다섯 살이에요.', romanization: 'aiga daseot sarieyo.', meaning: 'Đứa trẻ 5 tuổi.' },
+        ] },
+      { korean: '전화번호가 몇 번이에요?', romanization: 'jeonhwabeonhoga myeot beonieyo?', meaning: 'Số điện thoại của bạn là số mấy?', grammar: '전화번호 (số điện thoại) + 가 (trợ từ chủ ngữ) + 몇 번 (số mấy, dùng số Hán-Hàn) + 이에요.',
+        examples: [
+          { korean: '방 번호가 몇 번이에요?', romanization: 'bang beonhoga myeot beonieyo?', meaning: 'Số phòng là mấy?' },
+          { korean: '제 번호는 공일공이에요.', romanization: 'je beonhoneun gongilgongieyo.', meaning: 'Số của tôi là 010...' },
+          { korean: '몇 번 버스예요?', romanization: 'myeot beon beoseuyeyo?', meaning: 'Xe buýt số mấy?' },
+        ] },
+      { korean: '두 개 주세요.', romanization: 'du gae juseyo.', meaning: 'Cho tôi 2 cái.', grammar: '두 (hai, dạng đặc biệt của "둘" khi đứng trước lượng từ) + 개 (lượng từ đồ vật) + 주세요 (xin cho tôi — đuôi mệnh lệnh lịch sự).',
+        examples: [
+          { korean: '세 개 주세요.', romanization: 'se gae juseyo.', meaning: 'Cho tôi 3 cái.' },
+          { korean: '한 개만 주세요.', romanization: 'han gaeman juseyo.', meaning: 'Chỉ cho tôi 1 cái thôi.' },
+          { korean: '다섯 개 있어요.', romanization: 'daseot gae isseoyo.', meaning: 'Có 5 cái.' },
+        ] },
+      { korean: '지금 한 시 반이에요.', romanization: 'jigeum han si banieyo.', meaning: 'Bây giờ là 1 giờ rưỡi.', grammar: '한 시 (1 giờ: "하나"→"한" khi đứng trước lượng từ 시) + 반 (rưỡi) + 이에요.',
+        examples: [
+          { korean: '세 시 반이에요.', romanization: 'se si banieyo.', meaning: '3 giờ rưỡi.' },
+          { korean: '열두 시 반이에요.', romanization: 'yeoldu si banieyo.', meaning: '12 giờ rưỡi.' },
+          { korean: '여덟 시 반에 만나요.', romanization: 'yeodeol si bane mannayo.', meaning: 'Gặp lúc 8 giờ rưỡi.' },
+        ] },
     ],
   },
   {
@@ -120,11 +195,36 @@ const VOCAB_TOPICS = [
       { korean: '몇 월이에요?', romanization: 'myeot worieyo?', meaning: 'Tháng mấy?', usage: 'Câu hỏi tháng. Lưu ý tháng 6 và 10 phát âm đặc biệt: 유월 (không phải 육월), 시월 (không phải 십월).' },
     ],
     sentences: [
-      { korean: '오늘은 월요일이에요.', romanization: 'oneureun woryoirieyo.', meaning: 'Hôm nay là thứ Hai.', grammar: '오늘은 (hôm nay + trợ từ chủ đề 은) + 월요일 (danh từ) + 이에요.' },
-      { korean: '저는 아침 일곱 시에 일어나요.', romanization: 'jeoneun achim ilgop sie ireonayo.', meaning: 'Tôi thức dậy lúc 7 giờ sáng.', grammar: '일곱 시 (7 giờ) + 에 (trợ từ chỉ thời điểm, "vào lúc") + 일어나요 (thức dậy, động từ nguyên mẫu 일어나다).' },
-      { korean: '주말에 뭐 해요?', romanization: 'jumare mwo haeyo?', meaning: 'Cuối tuần bạn làm gì?', grammar: '주말 + 에 (trợ từ thời gian) + 뭐 (gì) + 해요 (làm, từ 하다).' },
-      { korean: '다음 주에 만나요.', romanization: 'daeum jue mannayo.', meaning: 'Hẹn gặp tuần sau.', grammar: '다음 주 (tuần sau) + 에 (trợ từ thời gian) + 만나요 (gặp — thì hiện tại/tương lai gần trong tiếng Hàn dùng chung dạng 아요/어요).' },
-      { korean: '생일이 언제예요?', romanization: 'saengiri eonjeyeyo?', meaning: 'Sinh nhật bạn khi nào?', grammar: '생일이 (sinh nhật + trợ từ chủ ngữ 이) + 언제 (khi nào) + 예요.' },
+      { korean: '오늘은 월요일이에요.', romanization: 'oneureun woryoirieyo.', meaning: 'Hôm nay là thứ Hai.', grammar: '오늘은 (hôm nay + trợ từ chủ đề 은) + 월요일 (danh từ) + 이에요.',
+        examples: [
+          { korean: '내일은 화요일이에요.', romanization: 'naeireun hwayoirieyo.', meaning: 'Mai là thứ Ba.' },
+          { korean: '오늘은 금요일이에요.', romanization: 'oneureun geumyoirieyo.', meaning: 'Hôm nay là thứ Sáu.' },
+          { korean: '어제는 일요일이었어요.', romanization: 'eojeneun iryoirieosseoyo.', meaning: 'Hôm qua là Chủ Nhật (thì quá khứ).' },
+        ] },
+      { korean: '저는 아침 일곱 시에 일어나요.', romanization: 'jeoneun achim ilgop sie ireonayo.', meaning: 'Tôi thức dậy lúc 7 giờ sáng.', grammar: '일곱 시 (7 giờ) + 에 (trợ từ chỉ thời điểm, "vào lúc") + 일어나요 (thức dậy, động từ nguyên mẫu 일어나다).',
+        examples: [
+          { korean: '저녁 여섯 시에 퇴근해요.', romanization: 'jeonyeok yeoseot sie toegeunhaeyo.', meaning: 'Tôi tan làm lúc 6 giờ tối.' },
+          { korean: '밤 열 시에 자요.', romanization: 'bam yeol sie jayo.', meaning: 'Tôi ngủ lúc 10 giờ tối.' },
+          { korean: '오후 두 시에 만나요.', romanization: 'ohu du sie mannayo.', meaning: 'Gặp lúc 2 giờ chiều.' },
+        ] },
+      { korean: '주말에 뭐 해요?', romanization: 'jumare mwo haeyo?', meaning: 'Cuối tuần bạn làm gì?', grammar: '주말 + 에 (trợ từ thời gian) + 뭐 (gì) + 해요 (làm, từ 하다).',
+        examples: [
+          { korean: '오늘 뭐 해요?', romanization: 'oneul mwo haeyo?', meaning: 'Hôm nay bạn làm gì?' },
+          { korean: '내일 뭐 할 거예요?', romanization: 'naeil mwo hal geoyeyo?', meaning: 'Mai bạn sẽ làm gì?' },
+          { korean: '지금 뭐 해요?', romanization: 'jigeum mwo haeyo?', meaning: 'Bây giờ bạn đang làm gì?' },
+        ] },
+      { korean: '다음 주에 만나요.', romanization: 'daeum jue mannayo.', meaning: 'Hẹn gặp tuần sau.', grammar: '다음 주 (tuần sau) + 에 (trợ từ thời gian) + 만나요 (gặp — thì hiện tại/tương lai gần trong tiếng Hàn dùng chung dạng 아요/어요).',
+        examples: [
+          { korean: '이번 주말에 만나요.', romanization: 'ibeon jumare mannayo.', meaning: 'Cuối tuần này gặp nhau.' },
+          { korean: '다음 달에 여행 가요.', romanization: 'daeum dare yeohaeng gayo.', meaning: 'Tháng sau đi du lịch.' },
+          { korean: '지난주에 바빴어요.', romanization: 'jinanjue bappasseoyo.', meaning: 'Tuần trước tôi bận.' },
+        ] },
+      { korean: '생일이 언제예요?', romanization: 'saengiri eonjeyeyo?', meaning: 'Sinh nhật bạn khi nào?', grammar: '생일이 (sinh nhật + trợ từ chủ ngữ 이) + 언제 (khi nào) + 예요.',
+        examples: [
+          { korean: '시험이 언제예요?', romanization: 'sihomi eonjeyeyo?', meaning: 'Kỳ thi khi nào?' },
+          { korean: '방학이 언제예요?', romanization: 'banghagi eonjeyeyo?', meaning: 'Nghỉ hè khi nào?' },
+          { korean: '회의가 언제예요?', romanization: 'hoeuiga eonjeyeyo?', meaning: 'Cuộc họp khi nào?' },
+        ] },
     ],
   },
   {
@@ -151,11 +251,36 @@ const VOCAB_TOPICS = [
       { korean: '숟가락', romanization: 'sutgarak', meaning: 'Thìa', usage: 'Người Hàn dùng thìa để ăn cơm và canh, đũa chủ yếu để gắp thức ăn — khác thói quen dùng đũa xúc cơm ở Việt Nam.' },
     ],
     sentences: [
-      { korean: '이거 매워요?', romanization: 'igeo maewoyo?', meaning: 'Cái này có cay không?', grammar: '이거 (cái này) + 맵다(cay) chia thành 매워요: tính từ đuôi ㅂ bất quy tắc — ㅂ đổi thành 우 rồi kết hợp với 어요 → 매워요.' },
-      { korean: '김치찌개 하나 주세요.', romanization: 'gimchijjigae hana juseyo.', meaning: 'Cho tôi một canh kim chi.', grammar: 'danh từ món ăn + 하나 (một, số thuần Hàn đứng một mình không cần lượng từ khi ngữ cảnh đã rõ) + 주세요.' },
-      { korean: '물 좀 더 주세요.', romanization: 'mul jom deo juseyo.', meaning: 'Cho tôi thêm chút nước.', grammar: '좀 (một chút — làm câu yêu cầu nghe mềm mỏng hơn) + 더 (thêm) + 주세요.' },
-      { korean: '저는 고기를 안 먹어요.', romanization: 'jeoneun gogireul an meogeoyo.', meaning: 'Tôi không ăn thịt.', grammar: '고기를 (thịt + trợ từ tân ngữ 를) + 안 (phó từ phủ định, đứng TRƯỚC động từ) + 먹어요 (ăn).' },
-      { korean: '여기 반찬 더 있어요?', romanization: 'yeogi banchan deo isseoyo?', meaning: 'Ở đây có thêm đồ ăn kèm không?', grammar: '반찬 (món ăn kèm) + 더 (thêm) + 있어요 (có) — nhiều quán Hàn cho thêm 반찬 miễn phí khi hỏi.' },
+      { korean: '이거 매워요?', romanization: 'igeo maewoyo?', meaning: 'Cái này có cay không?', grammar: '이거 (cái này) + 맵다(cay) chia thành 매워요: tính từ đuôi ㅂ bất quy tắc — ㅂ đổi thành 우 rồi kết hợp với 어요 → 매워요.',
+        examples: [
+          { korean: '이 음식은 안 매워요.', romanization: 'i eumsigeun an maewoyo.', meaning: 'Món này không cay.' },
+          { korean: '이거 뜨거워요?', romanization: 'igeo tteugeowoyo?', meaning: 'Cái này nóng không? (뜨겁다, cùng nhóm ㅂ bất quy tắc)' },
+          { korean: '날씨가 추워요.', romanization: 'nalssiga chuwoyo.', meaning: 'Trời lạnh (춥다, cùng nhóm ㅂ bất quy tắc).' },
+        ] },
+      { korean: '김치찌개 하나 주세요.', romanization: 'gimchijjigae hana juseyo.', meaning: 'Cho tôi một canh kim chi.', grammar: 'danh từ món ăn + 하나 (một, số thuần Hàn đứng một mình không cần lượng từ khi ngữ cảnh đã rõ) + 주세요.',
+        examples: [
+          { korean: '비빔밥 두 개 주세요.', romanization: 'bibimbap du gae juseyo.', meaning: 'Cho tôi 2 phần cơm trộn.' },
+          { korean: '커피 한 잔 주세요.', romanization: 'keopi han jan juseyo.', meaning: 'Cho tôi 1 ly cà phê (lượng từ 잔 dùng cho đồ uống).' },
+          { korean: '냉면 하나 주세요.', romanization: 'naengmyeon hana juseyo.', meaning: 'Cho tôi 1 phần mì lạnh.' },
+        ] },
+      { korean: '물 좀 더 주세요.', romanization: 'mul jom deo juseyo.', meaning: 'Cho tôi thêm chút nước.', grammar: '좀 (một chút — làm câu yêu cầu nghe mềm mỏng hơn) + 더 (thêm) + 주세요.',
+        examples: [
+          { korean: '밥 좀 더 주세요.', romanization: 'bap jom deo juseyo.', meaning: 'Cho tôi thêm cơm.' },
+          { korean: '소금 좀 주세요.', romanization: 'sogeum jom juseyo.', meaning: 'Cho tôi xin muối.' },
+          { korean: '시간 좀 주세요.', romanization: 'sigan jom juseyo.', meaning: 'Cho tôi thêm thời gian.' },
+        ] },
+      { korean: '저는 고기를 안 먹어요.', romanization: 'jeoneun gogireul an meogeoyo.', meaning: 'Tôi không ăn thịt.', grammar: '고기를 (thịt + trợ từ tân ngữ 를) + 안 (phó từ phủ định, đứng TRƯỚC động từ) + 먹어요 (ăn).',
+        examples: [
+          { korean: '저는 커피를 안 마셔요.', romanization: 'jeoneun keopireul an masyeoyo.', meaning: 'Tôi không uống cà phê.' },
+          { korean: '오늘 학교에 안 가요.', romanization: 'oneul hakgyoe an gayo.', meaning: 'Hôm nay tôi không đi học.' },
+          { korean: '저는 술을 안 마셔요.', romanization: 'jeoneun sureul an masyeoyo.', meaning: 'Tôi không uống rượu.' },
+        ] },
+      { korean: '여기 반찬 더 있어요?', romanization: 'yeogi banchan deo isseoyo?', meaning: 'Ở đây có thêm đồ ăn kèm không?', grammar: '반찬 (món ăn kèm) + 더 (thêm) + 있어요 (có) — nhiều quán Hàn cho thêm 반찬 miễn phí khi hỏi.',
+        examples: [
+          { korean: '다른 메뉴 있어요?', romanization: 'dareun menyu isseoyo?', meaning: 'Có thực đơn khác không?' },
+          { korean: '빈 자리 있어요?', romanization: 'bin jari isseoyo?', meaning: 'Có chỗ trống không?' },
+          { korean: '매운 음식 있어요?', romanization: 'maeun eumsik isseoyo?', meaning: 'Có món cay không?' },
+        ] },
     ],
   },
   {
@@ -182,11 +307,36 @@ const VOCAB_TOPICS = [
       { korean: '현금', romanization: 'hyeongeum', meaning: 'Tiền mặt', usage: 'Đối lập với 카드 (thẻ). Một số quán nhỏ chỉ nhận 현금.' },
     ],
     sentences: [
-      { korean: '이거 입어 봐도 돼요?', romanization: 'igeo ibeo bwado dwaeyo?', meaning: 'Tôi thử cái này được không?', grammar: 'động từ + 아/어 보다 (thử làm gì) + 아/어도 되다 (được phép làm gì) → cấu trúc xin phép rất thông dụng: 입어 보다 + 도 되다 → 입어 봐도 돼요.' },
-      { korean: '더 큰 사이즈 있어요?', romanization: 'deo keun saijeu isseoyo?', meaning: 'Có cỡ lớn hơn không?', grammar: '더 (hơn) + 크다(to) chia thành 큰 (dạng định ngữ của tính từ, đứng trước danh từ để bổ nghĩa) + 사이즈 + 있어요.' },
-      { korean: '현금으로 계산할게요.', romanization: 'hyeongeumeuro gyesanhalgeyo.', meaning: 'Tôi sẽ trả bằng tiền mặt.', grammar: '현금 (tiền mặt) + 으로 (trợ từ chỉ phương tiện/cách thức "bằng") + 계산할게요 (sẽ thanh toán — đuôi (으)ㄹ게요 diễn tả ý định/lời hứa của người nói).' },
-      { korean: '이거 얼마나 세일해요?', romanization: 'igeo eolmana seilhaeyo?', meaning: 'Cái này giảm giá bao nhiêu?', grammar: '얼마나 (bao nhiêu, hỏi mức độ) + 세일하다(giảm giá) chia dạng 해요.' },
-      { korean: '영수증 주세요.', romanization: 'yeongsujeung juseyo.', meaning: 'Cho tôi xin hóa đơn.', grammar: 'danh từ + 주세요 — mẫu câu yêu cầu cơ bản dùng lại từ chủ điểm Đồ ăn, áp dụng được cho mọi tình huống xin/nhận vật gì đó.' },
+      { korean: '이거 입어 봐도 돼요?', romanization: 'igeo ibeo bwado dwaeyo?', meaning: 'Tôi thử cái này được không?', grammar: '동사 + 아/어 보다 (thử làm gì) + 아/어도 되다 (được phép làm gì) → cấu trúc xin phép rất thông dụng: 입어 보다 + 도 되다 → 입어 봐도 돼요.',
+        examples: [
+          { korean: '먹어 봐도 돼요?', romanization: 'meogeo bwado dwaeyo?', meaning: 'Tôi ăn thử được không?' },
+          { korean: '사진 찍어도 돼요?', romanization: 'sajin jjigeodo dwaeyo?', meaning: 'Chụp ảnh được không?' },
+          { korean: '여기 앉아도 돼요?', romanization: 'yeogi anjado dwaeyo?', meaning: 'Tôi ngồi đây được không?' },
+        ] },
+      { korean: '더 큰 사이즈 있어요?', romanization: 'deo keun saijeu isseoyo?', meaning: 'Có cỡ lớn hơn không?', grammar: '더 (hơn) + 크다(to) chia thành 큰 (dạng định ngữ của tính từ, đứng trước danh từ để bổ nghĩa) + 사이즈 + 있어요.',
+        examples: [
+          { korean: '더 작은 거 있어요?', romanization: 'deo jageun geo isseoyo?', meaning: 'Có cái nhỏ hơn không?' },
+          { korean: '더 싼 거 없어요?', romanization: 'deo ssan geo eopseoyo?', meaning: 'Không có cái nào rẻ hơn à?' },
+          { korean: '더 예쁜 색 있어요?', romanization: 'deo yeppeun saek isseoyo?', meaning: 'Có màu đẹp hơn không?' },
+        ] },
+      { korean: '현금으로 계산할게요.', romanization: 'hyeongeumeuro gyesanhalgeyo.', meaning: 'Tôi sẽ trả bằng tiền mặt.', grammar: '현금 (tiền mặt) + 으로 (trợ từ chỉ phương tiện/cách thức "bằng") + 계산할게요 (sẽ thanh toán — đuôi (으)ㄹ게요 diễn tả ý định/lời hứa của người nói).',
+        examples: [
+          { korean: '카드로 계산할게요.', romanization: 'kadeuro gyesanhalgeyo.', meaning: 'Tôi sẽ trả bằng thẻ.' },
+          { korean: '버스로 가요.', romanization: 'beoseuro gayo.', meaning: 'Tôi đi bằng xe buýt.' },
+          { korean: '한국어로 말해요.', romanization: 'hangugeoro malhaeyo.', meaning: 'Nói bằng tiếng Hàn.' },
+        ] },
+      { korean: '이거 얼마나 세일해요?', romanization: 'igeo eolmana seilhaeyo?', meaning: 'Cái này giảm giá bao nhiêu?', grammar: '얼마나 (bao nhiêu, hỏi mức độ) + 세일하다(giảm giá) chia dạng 해요.',
+        examples: [
+          { korean: '얼마나 걸려요?', romanization: 'eolmana geollyeoyo?', meaning: 'Mất bao lâu?' },
+          { korean: '얼마나 자주 가요?', romanization: 'eolmana jaju gayo?', meaning: 'Bạn đi thường xuyên cỡ nào?' },
+          { korean: '얼마나 커요?', romanization: 'eolmana keoyo?', meaning: 'Nó to cỡ nào?' },
+        ] },
+      { korean: '영수증 주세요.', romanization: 'yeongsujeung juseyo.', meaning: 'Cho tôi xin hóa đơn.', grammar: 'danh từ + 주세요 — mẫu câu yêu cầu cơ bản dùng lại từ chủ điểm Đồ ăn, áp dụng được cho mọi tình huống xin/nhận vật gì đó.',
+        examples: [
+          { korean: '봉투 주세요.', romanization: 'bongtu juseyo.', meaning: 'Cho tôi túi.' },
+          { korean: '할인 쿠폰 있어요?', romanization: 'harin kupon isseoyo?', meaning: 'Có phiếu giảm giá không?' },
+          { korean: '다른 거 보여 주세요.', romanization: 'dareun geo boyeo juseyo.', meaning: 'Cho tôi xem cái khác.' },
+        ] },
     ],
   },
   {
@@ -213,11 +363,36 @@ const VOCAB_TOPICS = [
       { korean: '근처', romanization: 'geuncheo', meaning: 'Gần đây / lân cận', usage: 'Ví dụ: 이 근처에 편의점 있어요? (Gần đây có cửa hàng tiện lợi không?).' },
     ],
     sentences: [
-      { korean: '여기서 얼마나 걸려요?', romanization: 'yeogiseo eolmana geollyeoyo?', meaning: 'Từ đây mất bao lâu?', grammar: '여기서 (từ đây, trợ từ 에서 chỉ điểm xuất phát) + 얼마나 (bao lâu) + 걸리다(mất thời gian) chia 걸려요.' },
-      { korean: '지하철역이 어디에 있어요?', romanization: 'jihacheollyeogi eodie isseoyo?', meaning: 'Ga tàu điện ngầm ở đâu?', grammar: '지하철역 + 이 (trợ từ chủ ngữ) + 어디 (đâu) + 에 (trợ từ chỉ vị trí) + 있어요 (có/ở).' },
-      { korean: '이 버스가 시청에 가요?', romanization: 'i beoseuga sicheonge gayo?', meaning: 'Xe buýt này có đi Tòa thị chính không?', grammar: '이 (này, định ngữ chỉ định) + 버스가 (chủ ngữ) + 시청 (nơi đến) + 에 (trợ từ chỉ hướng đến) + 가요 (đi).' },
-      { korean: '다음 역에서 내려요.', romanization: 'daeum yeogeseo naeryeoyo.', meaning: 'Xuống ở ga tiếp theo.', grammar: '다음 역 (ga tiếp theo) + 에서 (trợ từ chỉ nơi diễn ra hành động) + 내려요 (xuống, từ 내리다).' },
-      { korean: '여기서 가까워요?', romanization: 'yeogiseo gakkawoyo?', meaning: 'Có gần đây không?', grammar: '여기서 (từ đây) + 가깝다(gần) chia 가까워요 — cùng nhóm tính từ đuôi ㅂ bất quy tắc như 맵다→매워요.' },
+      { korean: '여기서 얼마나 걸려요?', romanization: 'yeogiseo eolmana geollyeoyo?', meaning: 'Từ đây mất bao lâu?', grammar: '여기서 (từ đây, trợ từ 에서 chỉ điểm xuất phát) + 얼마나 (bao lâu) + 걸리다(mất thời gian) chia 걸려요.',
+        examples: [
+          { korean: '집에서 회사까지 얼마나 걸려요?', romanization: 'jibeseo hoesakkaji eolmana geollyeoyo?', meaning: 'Từ nhà đến công ty mất bao lâu?' },
+          { korean: '서울에서 부산까지 세 시간 걸려요.', romanization: 'seoureseo busankkaji se sigan geollyeoyo.', meaning: 'Từ Seoul đến Busan mất 3 tiếng.' },
+          { korean: '여기서 공항까지 한 시간 걸려요.', romanization: 'yeogiseo gonghangkkaji han sigan geollyeoyo.', meaning: 'Từ đây đến sân bay mất 1 tiếng.' },
+        ] },
+      { korean: '지하철역이 어디에 있어요?', romanization: 'jihacheollyeogi eodie isseoyo?', meaning: 'Ga tàu điện ngầm ở đâu?', grammar: '지하철역 + 이 (trợ từ chủ ngữ) + 어디 (đâu) + 에 (trợ từ chỉ vị trí) + 있어요 (có/ở).',
+        examples: [
+          { korean: '화장실이 어디에 있어요?', romanization: 'hwajangsiri eodie isseoyo?', meaning: 'Nhà vệ sinh ở đâu?' },
+          { korean: '편의점이 이 근처에 있어요.', romanization: 'pyeonuijeomi i geuncheoe isseoyo.', meaning: 'Cửa hàng tiện lợi ở gần đây.' },
+          { korean: '은행이 어디에 있어요?', romanization: 'eunhaengi eodie isseoyo?', meaning: 'Ngân hàng ở đâu?' },
+        ] },
+      { korean: '이 버스가 시청에 가요?', romanization: 'i beoseuga sicheonge gayo?', meaning: 'Xe buýt này có đi Tòa thị chính không?', grammar: '이 (này, định ngữ chỉ định) + 버스가 (chủ ngữ) + 시청 (nơi đến) + 에 (trợ từ chỉ hướng đến) + 가요 (đi).',
+        examples: [
+          { korean: '이 기차가 부산에 가요?', romanization: 'i gichaga busane gayo?', meaning: 'Tàu này có đi Busan không?' },
+          { korean: '이 지하철이 공항에 가요?', romanization: 'i jihacheori gonghange gayo?', meaning: 'Tàu điện ngầm này có đi sân bay không?' },
+          { korean: '저는 학교에 가요.', romanization: 'jeoneun hakgyoe gayo.', meaning: 'Tôi đi đến trường.' },
+        ] },
+      { korean: '다음 역에서 내려요.', romanization: 'daeum yeogeseo naeryeoyo.', meaning: 'Xuống ở ga tiếp theo.', grammar: '다음 역 (ga tiếp theo) + 에서 (trợ từ chỉ nơi diễn ra hành động) + 내려요 (xuống, từ 내리다).',
+        examples: [
+          { korean: '여기서 내려 주세요.', romanization: 'yeogiseo naeryeo juseyo.', meaning: 'Cho tôi xuống ở đây.' },
+          { korean: '다음 정류장에서 내려요.', romanization: 'daeum jeongnyujangeseo naeryeoyo.', meaning: 'Xuống ở trạm tiếp theo.' },
+          { korean: '공항에서 만나요.', romanization: 'gonghangeseo mannayo.', meaning: 'Gặp nhau ở sân bay.' },
+        ] },
+      { korean: '여기서 가까워요?', romanization: 'yeogiseo gakkawoyo?', meaning: 'Có gần đây không?', grammar: '여기서 (từ đây) + 가깝다(gần) chia 가까워요 — cùng nhóm tính từ đuôi ㅂ bất quy tắc như 맵다→매워요.',
+        examples: [
+          { korean: '학교에서 멀어요.', romanization: 'hakgyoeseo meoreoyo.', meaning: 'Xa trường học.' },
+          { korean: '역에서 가까워요.', romanization: 'yeogeseo gakkawoyo.', meaning: 'Gần ga.' },
+          { korean: '집에서 가까워요?', romanization: 'jibeseo gakkawoyo?', meaning: 'Có gần nhà không?' },
+        ] },
     ],
   },
   {
@@ -244,11 +419,36 @@ const VOCAB_TOPICS = [
       { korean: '계절', romanization: 'gyejeol', meaning: 'Mùa', usage: 'Danh từ chung chỉ khái niệm "mùa". Ví dụ: 어느 계절을 좋아해요? (Bạn thích mùa nào?).' },
     ],
     sentences: [
-      { korean: '오늘 날씨가 어때요?', romanization: 'oneul nalssiga eottaeyo?', meaning: 'Hôm nay thời tiết thế nào?', grammar: '날씨가 (thời tiết + trợ từ chủ ngữ 가) + 어때요 (thế nào — hỏi ý kiến/trạng thái, rất thông dụng).' },
-      { korean: '내일 비가 올 거예요.', romanization: 'naeil biga ol geoyeyo.', meaning: 'Ngày mai trời sẽ mưa.', grammar: 'động từ + (으)ㄹ 거예요 (thì tương lai dự đoán): 오다(đến/rơi) → 올 거예요.' },
-      { korean: '우산을 가져가세요.', romanization: 'usaneul gajyeogaseyo.', meaning: 'Hãy mang theo ô nhé.', grammar: '우산을 (ô + trợ từ tân ngữ 을) + 가져가다(mang đi) chia mệnh lệnh lịch sự 가져가세요.' },
-      { korean: '오늘 정말 더워요.', romanization: 'oneul jeongmal deowoyo.', meaning: 'Hôm nay nóng thật đấy.', grammar: '정말 (thật sự, trạng từ nhấn mạnh) + 더워요.' },
-      { korean: '저는 봄을 제일 좋아해요.', romanization: 'jeoneun bomeul jeil joahaeyo.', meaning: 'Tôi thích mùa xuân nhất.', grammar: '봄을 (mùa xuân + trợ từ tân ngữ 을) + 제일 (nhất) + 좋아하다(thích) chia 좋아해요.' },
+      { korean: '오늘 날씨가 어때요?', romanization: 'oneul nalssiga eottaeyo?', meaning: 'Hôm nay thời tiết thế nào?', grammar: '날씨가 (thời tiết + trợ từ chủ ngữ 가) + 어때요 (thế nào — hỏi ý kiến/trạng thái, rất thông dụng).',
+        examples: [
+          { korean: '이 옷 어때요?', romanization: 'i ot eottaeyo?', meaning: 'Bộ quần áo này thế nào?' },
+          { korean: '기분이 어때요?', romanization: 'gibuni eottaeyo?', meaning: 'Tâm trạng bạn thế nào?' },
+          { korean: '맛이 어때요?', romanization: 'masi eottaeyo?', meaning: 'Vị thế nào?' },
+        ] },
+      { korean: '내일 비가 올 거예요.', romanization: 'naeil biga ol geoyeyo.', meaning: 'Ngày mai trời sẽ mưa.', grammar: '동사 + (으)ㄹ 거예요 (thì tương lai dự đoán): 오다(đến/rơi) → 올 거예요.',
+        examples: [
+          { korean: '내일 날씨가 좋을 거예요.', romanization: 'naeil nalssiga joeul geoyeyo.', meaning: 'Mai thời tiết sẽ đẹp.' },
+          { korean: '눈이 올 거예요.', romanization: 'nuni ol geoyeyo.', meaning: 'Trời sẽ có tuyết.' },
+          { korean: '저는 내일 바쁠 거예요.', romanization: 'jeoneun naeil bappeul geoyeyo.', meaning: 'Mai tôi sẽ bận.' },
+        ] },
+      { korean: '우산을 가져가세요.', romanization: 'usaneul gajyeogaseyo.', meaning: 'Hãy mang theo ô nhé.', grammar: '우산을 (ô + trợ từ tân ngữ 을) + 가져가다(mang đi) chia mệnh lệnh lịch sự 가져가세요.',
+        examples: [
+          { korean: '여권을 가져오세요.', romanization: 'yeogwoneul gajyeooseyo.', meaning: 'Hãy mang hộ chiếu đến.' },
+          { korean: '이거 읽어 보세요.', romanization: 'igeo ilgeo boseyo.', meaning: 'Hãy đọc thử cái này.' },
+          { korean: '여기 앉으세요.', romanization: 'yeogi anjeuseyo.', meaning: 'Mời ngồi đây ạ.' },
+        ] },
+      { korean: '오늘 정말 더워요.', romanization: 'oneul jeongmal deowoyo.', meaning: 'Hôm nay nóng thật đấy.', grammar: '정말 (thật sự, trạng từ nhấn mạnh) + 더워요.',
+        examples: [
+          { korean: '정말 예뻐요.', romanization: 'jeongmal yeppeoyo.', meaning: 'Đẹp thật đấy.' },
+          { korean: '이거 정말 맛있어요.', romanization: 'igeo jeongmal masisseoyo.', meaning: 'Cái này ngon thật.' },
+          { korean: '오늘 정말 피곤해요.', romanization: 'oneul jeongmal pigonhaeyo.', meaning: 'Hôm nay mệt thật.' },
+        ] },
+      { korean: '저는 봄을 제일 좋아해요.', romanization: 'jeoneun bomeul jeil joahaeyo.', meaning: 'Tôi thích mùa xuân nhất.', grammar: '봄을 (mùa xuân + trợ từ tân ngữ 을) + 제일 (nhất) + 좋아하다(thích) chia 좋아해요.',
+        examples: [
+          { korean: '저는 여름을 제일 좋아해요.', romanization: 'jeoneun yeoreumeul jeil joahaeyo.', meaning: 'Tôi thích mùa hè nhất.' },
+          { korean: '저는 김치를 제일 좋아해요.', romanization: 'jeoneun gimchireul jeil joahaeyo.', meaning: 'Tôi thích kim chi nhất.' },
+          { korean: '무슨 계절을 제일 좋아해요?', romanization: 'museun gyejeoreul jeil joahaeyo?', meaning: 'Bạn thích mùa nào nhất?' },
+        ] },
     ],
   },
   {
@@ -275,11 +475,36 @@ const VOCAB_TOPICS = [
       { korean: '궁금해요', romanization: 'gunggeumhaeyo', meaning: 'Tò mò / thắc mắc', usage: 'Ví dụ: 결과가 궁금해요 (Tôi tò mò về kết quả).' },
     ],
     sentences: [
-      { korean: '저는 지금 기분이 좋아요.', romanization: 'jeoneun jigeum gibuni joayo.', meaning: 'Bây giờ tôi cảm thấy vui.', grammar: '기분이 (tâm trạng + trợ từ chủ ngữ 이) + 좋아요 (tốt/vui) — cấu trúc "기분이 + tính từ" rất thông dụng để diễn tả cảm xúc.' },
-      { korean: '왜 화났어요?', romanization: 'wae hwanasseoyo?', meaning: 'Sao bạn lại giận vậy?', grammar: '왜 (tại sao) + 화나다(giận) chia dạng quá khứ 화났어요 (어요→았/었어요).' },
-      { korean: '너무 피곤해서 쉬고 싶어요.', romanization: 'neomu pigonhaeseo swigo sipeoyo.', meaning: 'Tôi mệt quá nên muốn nghỉ ngơi.', grammar: 'tính từ/động từ + 아서/어서 (vì... nên...) + động từ + 고 싶어요 (muốn làm gì): 피곤하다→피곤해서, 쉬다→쉬고 싶어요.' },
-      { korean: '걱정하지 마세요.', romanization: 'geokjeonghaji maseyo.', meaning: 'Đừng lo lắng.', grammar: '동사 + 지 마세요 (đừng làm gì — câu mệnh lệnh phủ định lịch sự): 걱정하다 → 걱정하지 마세요.' },
-      { korean: '하나도 안 무서워요.', romanization: 'hanado an museowoyo.', meaning: 'Chẳng sợ tí nào cả.', grammar: '하나도 (một chút cũng — dùng cùng câu phủ định để nhấn mạnh "chẳng... tí nào") + 안 + 무서워요.' },
+      { korean: '저는 지금 기분이 좋아요.', romanization: 'jeoneun jigeum gibuni joayo.', meaning: 'Bây giờ tôi cảm thấy vui.', grammar: '기분이 (tâm trạng + trợ từ chủ ngữ 이) + 좋아요 (tốt/vui) — cấu trúc "기분이 + tính từ" rất thông dụng để diễn tả cảm xúc.',
+        examples: [
+          { korean: '기분이 나빠요.', romanization: 'gibuni nappayo.', meaning: 'Tâm trạng không tốt.' },
+          { korean: '오늘 기분이 어때요?', romanization: 'oneul gibuni eottaeyo?', meaning: 'Hôm nay tâm trạng bạn thế nào?' },
+          { korean: '기분이 좋아졌어요.', romanization: 'gibuni joajyeosseoyo.', meaning: 'Tâm trạng đã tốt hơn rồi.' },
+        ] },
+      { korean: '왜 화났어요?', romanization: 'wae hwanasseoyo?', meaning: 'Sao bạn lại giận vậy?', grammar: '왜 (tại sao) + 화나다(giận) chia dạng quá khứ 화났어요 (어요→았/었어요).',
+        examples: [
+          { korean: '왜 슬퍼요?', romanization: 'wae seulpeoyo?', meaning: 'Sao lại buồn?' },
+          { korean: '왜 늦었어요?', romanization: 'wae neujeosseoyo?', meaning: 'Sao lại đến muộn?' },
+          { korean: '왜 안 먹어요?', romanization: 'wae an meogeoyo?', meaning: 'Sao không ăn?' },
+        ] },
+      { korean: '너무 피곤해서 쉬고 싶어요.', romanization: 'neomu pigonhaeseo swigo sipeoyo.', meaning: 'Tôi mệt quá nên muốn nghỉ ngơi.', grammar: '동사/형용사 + 아서/어서 (vì... nên...) + 동사 + 고 싶어요 (muốn làm gì): 피곤하다→피곤해서, 쉬다→쉬고 싶어요.',
+        examples: [
+          { korean: '배고파서 밥을 먹고 싶어요.', romanization: 'baegopaseo babeul meokgo sipeoyo.', meaning: 'Vì đói nên tôi muốn ăn cơm.' },
+          { korean: '심심해서 영화를 보고 싶어요.', romanization: 'simsimhaeseo yeonghwareul bogo sipeoyo.', meaning: 'Vì chán nên tôi muốn xem phim.' },
+          { korean: '더워서 물을 마시고 싶어요.', romanization: 'deowoseo mureul masigo sipeoyo.', meaning: 'Vì nóng nên tôi muốn uống nước.' },
+        ] },
+      { korean: '걱정하지 마세요.', romanization: 'geokjeonghaji maseyo.', meaning: 'Đừng lo lắng.', grammar: '동사 + 지 마세요 (đừng làm gì — câu mệnh lệnh phủ định lịch sự): 걱정하다 → 걱정하지 마세요.',
+        examples: [
+          { korean: '울지 마세요.', romanization: 'ulji maseyo.', meaning: 'Đừng khóc.' },
+          { korean: '늦지 마세요.', romanization: 'neutji maseyo.', meaning: 'Đừng đến muộn.' },
+          { korean: '잊지 마세요.', romanization: 'itji maseyo.', meaning: 'Đừng quên.' },
+        ] },
+      { korean: '하나도 안 무서워요.', romanization: 'hanado an museowoyo.', meaning: 'Chẳng sợ tí nào cả.', grammar: '하나도 (một chút cũng — dùng cùng câu phủ định để nhấn mạnh "chẳng... tí nào") + 안 + 무서워요.',
+        examples: [
+          { korean: '하나도 안 슬퍼요.', romanization: 'hanado an seulpeoyo.', meaning: 'Chẳng buồn tí nào.' },
+          { korean: '하나도 안 힘들어요.', romanization: 'hanado an himdeureoyo.', meaning: 'Chẳng vất vả tí nào.' },
+          { korean: '하나도 몰라요.', romanization: 'hanado mollayo.', meaning: 'Chẳng biết gì cả.' },
+        ] },
     ],
   },
   {
@@ -306,11 +531,36 @@ const VOCAB_TOPICS = [
       { korean: '조심하세요', romanization: 'josimhaseyo', meaning: 'Cẩn thận nhé', usage: 'Dùng khi tạm biệt ai đó sắp đi đường xa, hoặc nhắc nhở về nguy hiểm trước mắt.' },
     ],
     sentences: [
-      { korean: '한국어 할 줄 알아요?', romanization: 'hangugeo hal jul arayo?', meaning: 'Bạn biết nói tiếng Hàn không?', grammar: 'động từ nguyên mẫu chia dạng định ngữ (으)ㄹ + 줄 알다 (biết cách làm gì): 하다 → 할 줄 알아요 — cấu trúc diễn tả khả năng.' },
-      { korean: '이거 어떻게 말해요?', romanization: 'igeo eotteoke malhaeyo?', meaning: 'Cái này nói thế nào?', grammar: '어떻게 (như thế nào) + 말하다(nói) chia 말해요.' },
-      { korean: '미안한데 다시 한번 말해 주세요.', romanization: 'mianhande dasi hanbeon malhae juseyo.', meaning: 'Xin lỗi nhưng làm ơn nói lại một lần nữa.', grammar: '미안하다(xin lỗi) chia đuôi 는데/ㄴ데 (nhưng, dẫn nhập trước khi nhờ vả) + 다시 한번 (một lần nữa) + 말해 주세요.' },
-      { korean: '천천히 해도 돼요.', romanization: 'cheoncheonhi haedo dwaeyo.', meaning: 'Làm từ từ cũng được.', grammar: '동사 + 아도/어도 되다 (làm gì đó cũng được — cho phép): 하다 → 해도 돼요.' },
-      { korean: '무슨 뜻이에요?', romanization: 'museun tteusieyo?', meaning: 'Nghĩa là gì vậy?', grammar: '무슨 (gì, loại nào — định ngữ nghi vấn đứng trước danh từ) + 뜻 (nghĩa) + 이에요.' },
+      { korean: '한국어 할 줄 알아요?', romanization: 'hangugeo hal jul arayo?', meaning: 'Bạn biết nói tiếng Hàn không?', grammar: '동사 nguyên mẫu chia dạng định ngữ (으)ㄹ + 줄 알다 (biết cách làm gì): 하다 → 할 줄 알아요 — cấu trúc diễn tả khả năng.',
+        examples: [
+          { korean: '운전할 줄 알아요?', romanization: 'unjeonhal jul arayo?', meaning: 'Bạn biết lái xe không?' },
+          { korean: '요리할 줄 알아요?', romanization: 'yorihal jul arayo?', meaning: 'Bạn biết nấu ăn không?' },
+          { korean: '수영할 줄 몰라요.', romanization: 'suyeonghal jul mollayo.', meaning: 'Tôi không biết bơi.' },
+        ] },
+      { korean: '이거 어떻게 말해요?', romanization: 'igeo eotteoke malhaeyo?', meaning: 'Cái này nói thế nào?', grammar: '어떻게 (như thế nào) + 말하다(nói) chia 말해요.',
+        examples: [
+          { korean: '이거 어떻게 먹어요?', romanization: 'igeo eotteoke meogeoyo?', meaning: 'Cái này ăn thế nào?' },
+          { korean: '여기 어떻게 가요?', romanization: 'yeogi eotteoke gayo?', meaning: 'Đến đây bằng cách nào?' },
+          { korean: '어떻게 지내요?', romanization: 'eotteoke jinaeyo?', meaning: 'Bạn sống thế nào? (cách hỏi thăm khác)' },
+        ] },
+      { korean: '미안한데 다시 한번 말해 주세요.', romanization: 'mianhande dasi hanbeon malhae juseyo.', meaning: 'Xin lỗi nhưng làm ơn nói lại một lần nữa.', grammar: '미안하다(xin lỗi) chia đuôi 는데/ㄴ데 (nhưng, dẫn nhập trước khi nhờ vả) + 다시 한번 (một lần nữa) + 말해 주세요.',
+        examples: [
+          { korean: '죄송한데 조금 늦을 것 같아요.', romanization: 'joesonghande jogeum neujeul geot gatayo.', meaning: 'Xin lỗi nhưng chắc tôi sẽ đến hơi muộn.' },
+          { korean: '배고픈데 뭐 먹을까요?', romanization: 'baegopeunde mwo meogeulkkayo?', meaning: 'Đói bụng rồi, ăn gì đây nhỉ?' },
+          { korean: '시간 있는데 커피 마실래요?', romanization: 'sigan issneunde keopi masillaeyo?', meaning: 'Tôi có thời gian, uống cà phê không?' },
+        ] },
+      { korean: '천천히 해도 돼요.', romanization: 'cheoncheonhi haedo dwaeyo.', meaning: 'Làm từ từ cũng được.', grammar: '동사 + 아도/어도 되다 (làm gì đó cũng được — cho phép): 하다 → 해도 돼요.',
+        examples: [
+          { korean: '여기 앉아도 돼요?', romanization: 'yeogi anjado dwaeyo?', meaning: 'Ngồi đây được không?' },
+          { korean: '나중에 해도 돼요.', romanization: 'najunge haedo dwaeyo.', meaning: 'Làm sau cũng được.' },
+          { korean: '조금 늦어도 돼요.', romanization: 'jogeum neujeodo dwaeyo.', meaning: 'Đến muộn một chút cũng được.' },
+        ] },
+      { korean: '무슨 뜻이에요?', romanization: 'museun tteusieyo?', meaning: 'Nghĩa là gì vậy?', grammar: '무슨 (gì, loại nào — định ngữ nghi vấn đứng trước danh từ) + 뜻 (nghĩa) + 이에요.',
+        examples: [
+          { korean: '무슨 음식을 좋아해요?', romanization: 'museun eumsigeul joahaeyo?', meaning: 'Bạn thích món ăn gì?' },
+          { korean: '무슨 색을 좋아해요?', romanization: 'museun saegeul joahaeyo?', meaning: 'Bạn thích màu gì?' },
+          { korean: '무슨 일이에요?', romanization: 'museun irieyo?', meaning: 'Có chuyện gì vậy?' },
+        ] },
     ],
   },
 ];
