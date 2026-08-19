@@ -322,8 +322,8 @@ function moduleHomeHTML(moduleId) {
       <button class="module-card" id="btn-quiz">
         <div class="module-glyph">📝</div>
         <div class="module-body">
-          <h3>Kiểm tra tổng hợp</h3>
-          <p>${isLast ? 'Đánh giá toàn bộ nhóm này' : 'Đạt ≥80% để mở khóa nhóm tiếp theo'}</p>
+          <h3>Kiểm tra tổng hợp (${(idx + 1) * 10} câu)</h3>
+          <p>${idx === 0 ? 'Chỉ trong nhóm này' : `Ôn lại cả ${idx + 1} nhóm đã học`}${isLast ? '' : ' · đạt ≥80% để mở khóa nhóm tiếp theo'}</p>
         </div>
       </button>
       ${moduleId === 'syllables' ? `
@@ -496,23 +496,63 @@ function drawTraceGuide(char) {
 }
 
 // ============ PRACTICE / QUIZ SESSION ============
-function startSession(moduleId, mode) {
-  const m = getModule(moduleId);
-  const count = Math.min(10, m.letters.length);
-  const chosenIndices = sample(m.letters.map((_, i) => i), count);
+// Trả về mảng độ dài `count`, xoay vòng qua các phần tử đã xáo trộn khi count > số phần tử,
+// tránh lặp lại ngay ở ranh giới giữa 2 vòng.
+function sampleWithRepeat(items, count) {
+  const result = [];
+  while (result.length < count) {
+    const batch = shuffle(items);
+    if (result.length > 0 && batch.length > 1 && batch[0] === result[result.length - 1]) {
+      [batch[0], batch[1]] = [batch[1], batch[0]];
+    }
+    result.push(...batch);
+  }
+  return result.slice(0, count);
+}
 
-  const questions = chosenIndices.map(letterIndex => {
+// Luyện tập (nghe/nhìn): chỉ trong phạm vi module hiện tại, 30 câu (xoay vòng nếu module ít chữ).
+// Kiểm tra tổng hợp: tích lũy toàn bộ các module từ đầu đến module hiện tại, số câu tăng dần
+// theo cấp số 10 mỗi module (module 1 = 10 câu, module 2 = 20 câu, ...), để càng học lên cao
+// càng phải ôn lại kiến thức cũ — độ khó tăng dần.
+function buildLetterPool(moduleId, mode) {
+  const targetIdx = getModuleIndex(moduleId);
+  if (mode === 'quiz') {
+    const pool = [];
+    for (let i = 0; i <= targetIdx; i++) {
+      MODULES[i].letters.forEach((letter, li) => pool.push({ moduleId: MODULES[i].id, letterIndex: li, letter }));
+    }
+    return pool;
+  }
+  const mod = getModule(moduleId);
+  return mod.letters.map((letter, li) => ({ moduleId: mod.id, letterIndex: li, letter }));
+}
+
+function startSession(moduleId, mode) {
+  const idx = getModuleIndex(moduleId);
+  const pool = buildLetterPool(moduleId, mode);
+  const count = mode === 'quiz' ? (idx + 1) * 10 : 30;
+  const chosen = sampleWithRepeat(pool, count);
+
+  const questions = chosen.map(entry => {
     const qType = mode === 'quiz' ? (Math.random() < 0.5 ? 'listen' : 'look') : mode;
-    const correct = m.letters[letterIndex];
-    const others = m.letters
-      .map((l, i) => ({ l, i }))
-      .filter(o => o.i !== letterIndex);
-    const distractors = sample(others, 3).map(o => o.l);
-    const pool = shuffle([correct, ...distractors]);
+    const correct = entry.letter;
+    const correctValue = qType === 'listen' ? correct.char : correct.romanization;
+    const seenValues = new Set([correctValue]);
+    const distractors = [];
+    for (const p of shuffle(pool)) {
+      if (p.moduleId === entry.moduleId && p.letterIndex === entry.letterIndex) continue;
+      const val = qType === 'listen' ? p.letter.char : p.letter.romanization;
+      if (seenValues.has(val)) continue;
+      seenValues.add(val);
+      distractors.push(p.letter);
+      if (distractors.length === 3) break;
+    }
+    const optionPool = shuffle([correct, ...distractors]);
     return {
-      letterIndex,
+      moduleId: entry.moduleId,
+      letterIndex: entry.letterIndex,
       qType,
-      choices: pool.map(l => ({
+      choices: optionPool.map(l => ({
         value: qType === 'listen' ? l.char : l.romanization,
         isCorrect: l === correct,
       })),
@@ -535,9 +575,9 @@ function finalizeSession() {
 }
 
 function practiceHTML() {
-  const m = getModule(session.moduleId);
+  const moduleTitle = getModule(session.moduleId).title;
   const q = session.questions[session.index];
-  const letter = m.letters[q.letterIndex];
+  const letter = getModule(q.moduleId).letters[q.letterIndex];
   const modeLabel = session.mode === 'quiz' ? 'Kiểm tra tổng hợp' : (session.mode === 'listen' ? 'Luyện nghe' : 'Luyện nhìn');
   const pct = Math.round((session.index / session.questions.length) * 100);
 
@@ -559,7 +599,7 @@ function practiceHTML() {
   }
 
   return `
-    <div class="back-row"><button class="btn btn-ghost" id="btn-back-module">← ${m.title}</button></div>
+    <div class="back-row"><button class="btn btn-ghost" id="btn-back-module">← ${moduleTitle}</button></div>
     <div class="practice-progress">
       <span>${modeLabel} · Câu ${session.index + 1}/${session.questions.length}</span>
       <div class="header-progress-bar"><div class="header-progress-fill" style="width:${pct}%"></div></div>
@@ -572,9 +612,8 @@ function practiceHTML() {
   `;
 }
 function attachPractice() {
-  const m = getModule(session.moduleId);
   const q = session.questions[session.index];
-  const letter = m.letters[q.letterIndex];
+  const letter = getModule(q.moduleId).letters[q.letterIndex];
 
   document.getElementById('btn-back-module').addEventListener('click', () => navigate('moduleHome', { moduleId: session.moduleId }));
 
@@ -592,14 +631,13 @@ function handleAnswer(choiceIndex) {
   if (session.answered) return;
   session.answered = true;
   const q = session.questions[session.index];
-  const m = getModule(session.moduleId);
-  const letter = m.letters[q.letterIndex];
+  const letter = getModule(q.moduleId).letters[q.letterIndex];
   const chosen = q.choices[choiceIndex];
   const correct = chosen.isCorrect;
 
   if (correct) {
     session.correctCount++;
-    const mp = ensureModuleProgress(session.moduleId);
+    const mp = ensureModuleProgress(q.moduleId);
     if (!mp.learned.includes(q.letterIndex)) mp.learned.push(q.letterIndex);
     saveProgress();
     updateHeaderProgress();
