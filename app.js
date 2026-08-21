@@ -803,7 +803,7 @@ function vocabHomeHTML() {
 
   return `
     <h1 class="home-title">Từ vựng đời sống</h1>
-    <p class="home-sub">10 chủ điểm tiếng Hàn dùng trong sinh hoạt hằng ngày, kèm cách sử dụng thực tế.</p>
+    <p class="home-sub">${VOCAB_TOPICS.length} chủ điểm tiếng Hàn dùng trong sinh hoạt hằng ngày, kèm cách sử dụng thực tế.</p>
     <div class="module-grid">${cards}</div>
   `;
 }
