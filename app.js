@@ -541,8 +541,12 @@ function startSession(moduleId, mode) {
     const correctValue = qType === 'listen' ? correct.char : correct.romanization;
     const seenValues = new Set([correctValue]);
     const distractors = [];
-    for (const p of shuffle(pool)) {
-      if (p.moduleId === entry.moduleId && p.letterIndex === entry.letterIndex) continue;
+    // Đáp án nhiễu PHẢI cùng loại (cùng module) với đáp án đúng — nếu câu hỏi về nguyên âm
+    // mà đáp án nhiễu là âm tiết ghép/batchim thì đáp án đúng sẽ lộ ngay bằng mắt, không
+    // còn kiểm tra được kiến thức thật.
+    const sameModulePool = pool.filter(p => p.moduleId === entry.moduleId);
+    for (const p of shuffle(sameModulePool)) {
+      if (p.letterIndex === entry.letterIndex) continue;
       const val = qType === 'listen' ? p.letter.char : p.letter.romanization;
       if (seenValues.has(val)) continue;
       seenValues.add(val);
